@@ -209,12 +209,12 @@
 
     <div class="container">
         <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1598300042795-364e52541999?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern Accent Chair">
+            <img id="product-main-image" src="https://images.unsplash.com/photo-1598300042795-364e52541999?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern Accent Chair">
         </div>
         <div class="product-details">
-            <h2>Modern Accent Chair</h2>
-            <div class="price">$349.99</div>
-            <p class="description">
+            <h2 id="product-title">Modern Accent Chair</h2>
+            <div class="price" id="product-price">$349.99</div>
+            <p class="description" id="product-description">
                 Elevate your living space with this elegantly designed accent chair. Featuring a sleek silhouette and plush velvet upholstery, it offers both style and exceptional comfort. Perfect for adding a touch of sophistication to any room.
             </p>
             <div class="features">
@@ -279,13 +279,131 @@
         <p>&copy; 2025 Timeless Living. All rights reserved.</p>
     </footer>
     <script>
-        // Simple JavaScript to simulate adding to cart and redirecting to checkout
         document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
-            alert('Product added to cart!');
-            // In a real application, you would add logic here to update a cart object
-            // For this simulation, let's redirect to the checkout page directly
-            window.location.href = 'checkout.html';
+            const productId = new URLSearchParams(window.location.search).get('id') || 'default-product'; // Get ID from URL or use a default
+            const productTitle = document.getElementById('product-title').innerText;
+            const productPriceText = document.getElementById('product-price').innerText;
+            const productPrice = parseFloat(productPriceText.replace('$', ''));
+            const productImage = document.getElementById('product-main-image').src;
+
+            // Get current cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if product already in cart
+            const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productTitle,
+                    price: productPrice,
+                    image: productImage,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(productTitle + ' added to cart!'); // Use alert for simplicity as per previous conversation
+            window.location.href = 'cart.html'; // Redirect to the new cart page
         });
+
+        // Simple function to update product details based on URL ID
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            // Simulate product data - in a real app, you'd fetch this from a database
+            const products = {
+                'sofa': {
+                    title: 'Luxurious Corner Sofa',
+                    price: 999.00,
+                    description: 'A spacious and comfortable sofa for your living room, upholstered in premium fabric with solid wood legs. Perfect for large families or entertaining guests.',
+                    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'dining-table': {
+                    title: 'Minimalist Dining Table',
+                    price: 549.99,
+                    description: 'A sleek and modern dining table with clean lines, made from high-quality engineered wood. Seats 4-6 comfortably, ideal for contemporary homes.',
+                    image: 'https://images.unsplash.com/photo-1517705008130-bb3433ed6de6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'office-chair': {
+                    title: 'Ergonomic Office Chair',
+                    price: 249.00,
+                    description: 'Designed for ultimate comfort and support during long working hours. Features adjustable lumbar support, armrests, and headrest.',
+                    image: 'https://images.unsplash.com/photo-1592078619290-ca195208492c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'bed-frame': {
+                    title: 'King Size Bed Frame',
+                    price: 789.50,
+                    description: 'A sturdy and stylish king-size bed frame, crafted from solid oak. Its minimalist design complements any bedroom decor.',
+                    image: 'https://images.unsplash.com/photo-1540302061614-727b14066929?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'coffee-table': {
+                    title: 'Geometric Coffee Table',
+                    price: 185.00,
+                    description: 'A unique coffee table with a modern geometric base and a smooth tempered glass top, adding an artistic touch to your living room.',
+                    image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'bookshelf': {
+                    title: 'Industrial Bookshelf',
+                    price: 320.00,
+                    description: 'An open-concept bookshelf with a blend of metal and distressed wood, perfect for displaying books, plants, and decorative items.',
+                    image: 'https://images.unsplash.com/photo-1563851508605-671c6d36e768?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'armchair': {
+                    title: 'Plush Armchair',
+                    price: 450.00,
+                    description: 'Sink into comfort with this plush armchair, featuring soft upholstery and a supportive design. An ideal reading nook addition.',
+                    image: 'https://images.unsplash.com/photo-1561053723-455b85a3a0c3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'dresser': {
+                    title: 'Solid Wood Dresser',
+                    price: 620.00,
+                    description: 'A classic solid wood dresser with multiple drawers, providing ample storage for your bedroom essentials. Built to last.',
+                    image: 'https://images.unsplash.com/photo-1594098906644-88aa0b75ac34?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                 'modern-accent-chair': { // Default product if no ID is found
+                    title: 'Modern Accent Chair',
+                    price: 349.99,
+                    description: 'Elevate your living space with this elegantly designed accent chair. Featuring a sleek silhouette and plush velvet upholstery, it offers both style and exceptional comfort. Perfect for adding a touch of sophistication to any room.',
+                    image: 'https://images.unsplash.com/photo-1598300042795-364e52541999?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'side-table': {
+                    title: 'Geometric Side Table',
+                    price: 89.00,
+                    description: 'A contemporary side table with a unique geometric metal base and a round wooden top, ideal for holding your coffee or books.',
+                    image: 'https://images.unsplash.com/photo-1549488349-e583c746765d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'floor-lamp': {
+                    title: 'Arched Floor Lamp',
+                    price: 120.00,
+                    description: 'An elegant arched floor lamp with a linen shade, providing warm ambient light to your living room or bedroom corners.',
+                    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'throw-pillow': {
+                    title: 'Velvet Throw Pillow',
+                    price: 25.00,
+                    description: 'Soft and luxurious velvet throw pillow, perfect for adding a pop of color and comfort to your sofa or bed.',
+                    image: 'https://images.unsplash.com/photo-1561053723-455b85a3a0c3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                },
+                'area-rug': {
+                    title: 'Abstract Area Rug',
+                    price: 150.00,
+                    description: 'A modern abstract area rug with subtle patterns and neutral tones, enhancing the aesthetics of any contemporary space.',
+                    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                }
+            };
+
+            const product = products[productId] || products['modern-accent-chair']; // Fallback to default
+
+            document.getElementById('product-title').innerText = product.title;
+            document.getElementById('product-price').innerText = `$${product.price.toFixed(2)}`;
+            document.getElementById('product-description').innerText = product.description;
+            document.getElementById('product-main-image').src = product.image;
+            document.getElementById('product-main-image').alt = product.title;
+        };
     </script>
 </body>
 </html>
