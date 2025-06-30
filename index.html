@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeless Living - Your Online Furniture Store</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfaf7; /* A very soft, warm off-white */
+            color: #333;
+        }
+        .header-bg {
+            background-color: #5a2c20; /* Deep reddish-brown */
+        }
+        .hero-bg {
+            background-image: url('https://placehold.co/1400x700/D4BBA5/5a2c20?text=Create+Your+Dream+Space'); /* Larger placeholder for warm, inviting image */
+            background-size: cover;
+            background-position: center;
+            min-height: 85vh; /* Taller hero for impact */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4); /* For text readability on image */
+        }
+        .cta-button {
+            background-color: #e27d60; /* Soft coral/orange */
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #cd6a4d; /* Darker coral */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(226, 125, 96, 0.4);
+        }
+        .product-card-shadow {
+            box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.08);
+        }
+        .product-card:hover {
+            transform: translateY(-8px); /* More pronounced lift on hover */
+            box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.25);
+        }
+        .category-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px -6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="header-bg text-white py-5 shadow-lg">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-4xl font-extrabold tracking-wide">Timeless Living</h1>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-10">
+                    <li><a href="index.html" class="hover:text-amber-200 text-lg font-medium">Home</a></li>
+                    <li><a href="products.html" class="hover:text-amber-200 text-lg font-medium">Shop</a></li>
+                    <li><a href="#" class="hover:text-amber-200 text-lg font-medium">About</a></li>
+                    <li><a href="contact.html" class="hover:text-amber-200 text-lg font-medium">Contact</a></li>
+                    <li><a href="products.html" class="cta-button text-white px-7 py-3 rounded-full text-lg font-bold">Browse Collections</a></li>
+                </ul>
+            </nav>
+            <button class="md:hidden text-white text-2xl">&#9776;</button> <!-- Hamburger menu placeholder -->
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-24 md:py-40 text-center relative overflow-hidden">
+        <div class="relative z-10 container mx-auto px-6 py-20 bg-black bg-opacity-30 rounded-2xl max-w-4xl">
+            <h2 class="text-6xl md:text-8xl font-extrabold leading-tight mb-12"> <!-- Increased mb-10 to mb-12 -->
+                Crafting Comfort, Elevating Style
+            </h2>
+            <br>
+            <br>
+            <br>
+            <p class="text-xl md:text-2xl mb-16 opacity-95 max-w-3xl mx-auto leading-relaxed"> <!-- Increased mb-14 to mb-16 -->
+                Discover handcrafted furniture that brings warmth, elegance, and lasting beauty to every corner of your home.
+            </p>
+            <a href="products.html" class="cta-button text-white px-16 py-7 rounded-full text-2xl font-bold hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-amber-300 focus:ring-opacity-75 transition duration-300">
+                Explore Our Collections
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 text-center max-w-6xl">
+            <h3 class="text-4xl font-bold text-gray-900 mb-10 rounded-lg">Our Handpicked Favorites</h3> <!-- Increased mb-6 to mb-10 -->
+            <p class="text-lg text-gray-600 mb-20 max-w-2xl mx-auto leading-relaxed">A selection of our most popular and beloved pieces, designed to inspire your home's aesthetic.</p> <!-- Increased mb-16 to mb-20 -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <!-- Featured Product 1 -->
+                <div class="bg-gray-50 rounded-xl product-card-shadow transition duration-300 product-card overflow-hidden">
+                    <img src="https://placehold.co/600x450/e6ccb2/5a2c20?text=Cozy+Sofa" alt="Cozy Sofa" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-4">The Comfort Cloud Sofa</h4> <!-- Increased mb-3 to mb-4 -->
+                        <p class="text-gray-600 text-base mb-7 leading-normal">Experience ultimate relaxation with our best-selling sofa.</p> <!-- Increased mb-6 to mb-7 -->
+                        <div class="text-3xl font-extrabold text-blue-700 mb-6">₹ 49,999</div> <!-- Increased mb-5 to mb-6 -->
+                        <a href="product-detail.html?id=sofa1" class="bg-blue-600 text-white px-9 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300">View Details</a>
+                    </div>
+                </div>
+                <!-- Featured Product 2 -->
+                <div class="bg-gray-50 rounded-xl product-card-shadow transition duration-300 product-card overflow-hidden">
+                    <img src="https://placehold.co/600x450/a8dadc/5a2c20?text=Minimal+Table" alt="Minimalist Dining Table" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-4">Sleek Oak Dining Table</h4>
+                        <p class="text-gray-600 text-base mb-7 leading-normal">Designed for timeless meals and memorable gatherings.</p>
+                        <div class="text-3xl font-extrabold text-blue-700 mb-6">₹ 29,499</div>
+                        <a href="product-detail.html?id=table1" class="bg-blue-600 text-white px-9 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300">View Details</a>
+                    </div>
+                </div>
+                <!-- Featured Product 3 -->
+                <div class="bg-gray-50 rounded-xl product-card-shadow transition duration-300 product-card overflow-hidden">
+                    <img src="https://placehold.co/600x450/bbbbbb/5a2c20?text=Oak+Bookshelf" alt="Solid Oak Bookshelf" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-4">Heritage Wood Bookshelf</h4>
+                        <p class="text-gray-600 text-base mb-7 leading-normal">Showcase your literary treasures with rustic charm.</p>
+                        <div class="text-3xl font-extrabold text-blue-700 mb-6">₹ 18,750</div>
+                        <a href="product-detail.html?id=bookshelf1" class="bg-blue-600 text-white px-9 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-24"> <!-- Increased mt-20 to mt-24 -->
+                <a href="products.html" class="cta-button text-white px-12 py-6 rounded-full text-xl font-bold hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-amber-300 focus:ring-opacity-75 transition duration-300">
+                    View All Products
+                </a>
+            </div>
+        </section>
+
+    <!-- Shop by Room Section -->
+    <section class="py-24 bg-fdfaf7">
+        <div class="container mx-auto px-6 text-center max-w-6xl">
+            <h3 class="text-4xl font-bold text-gray-900 mb-10 rounded-lg">Shop by Room</h3> <!-- Increased mb-6 to mb-10 -->
+            <p class="text-lg text-gray-600 mb-20 max-w-2xl mx-auto leading-relaxed">Find the perfect pieces for every space in your home, curated for your convenience.</p> <!-- Increased mb-16 to mb-20 -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <!-- Room Category 1 -->
+                <div class="category-card transform hover:scale-105">
+                    <img src="https://placehold.co/400x250/e6ccb2/5a2c20?text=Living+Room" alt="Living Room" class="w-full h-48 object-cover object-center rounded-t-lg">
+                    <div class="p-8">
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-4">Living Room</h4> <!-- Increased mb-3 to mb-4 -->
+                        <p class="text-gray-600 text-base mb-6">Sofas, coffee tables, TV units & more.</p> <!-- Increased mb-5 to mb-6 -->
+                        <a href="products.html?category=living-room" class="text-blue-600 hover:underline font-semibold text-lg">Shop Now &rarr;</a>
+                    </div>
+                </div>
+                <!-- Room Category 2 -->
+                <div class="category-card transform hover:scale-105">
+                    <img src="https://placehold.co/400x250/a8dadc/5a2c20?text=Bedroom" alt="Bedroom" class="w-full h-48 object-cover object-center rounded-t-lg">
+                    <div class="p-8">
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-4">Bedroom</h4>
+                        <p class="text-gray-600 text-base mb-6">Beds, wardrobes, nightstands & dressers.</p>
+                        <a href="products.html?category=bedroom" class="text-blue-600 hover:underline font-semibold text-lg">Shop Now &rarr;</a>
+                    </div>
+                </div>
+                <!-- Room Category 3 -->
+                <div class="category-card transform hover:scale-105">
+                    <img src="https://placehold.co/400x250/bbbbbb/5a2c20?text=Dining+Room" alt="Dining Room" class="w-full h-48 object-cover object-center rounded-t-lg">
+                    <div class="p-8">
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-4">Dining Room</h4>
+                        <p class="text-gray-600 text-base mb-6">Dining tables, chairs & sideboards.</p>
+                        <a href="products.html?category=dining-room" class="text-blue-600 hover:underline font-semibold text-lg">Shop Now &rarr;</a>
+                    </div>
+                </div>
+                <!-- Room Category 4 -->
+                <div class="category-card transform hover:scale-105">
+                    <img src="https://placehold.co/400x250/c7d3d4/5a2c20?text=Home+Office" alt="Home Office" class="w-full h-48 object-cover object-center rounded-t-lg">
+                    <div class="p-8">
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-4">Home Office</h4>
+                        <p class="text-gray-600 text-base mb-6">Desks, office chairs & bookshelves.</p>
+                        <a href="products.html?category=home-office" class="text-blue-600 hover:underline font-semibold text-lg">Shop Now &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Trust Section -->
+    <section class="py-24 bg-blue-700 text-white text-center">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h3 class="text-4xl font-bold mb-10 rounded-lg">Why Choose Timeless Living?</h3> <!-- Increased mb-8 to mb-10 -->
+            <p class="text-xl opacity-90 mb-16 max-w-3xl mx-auto leading-relaxed">
+                We are committed to quality, craftsmanship, and customer satisfaction. Furnish your home with confidence.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="flex flex-col items-center">
+                    <div class="text-5xl mb-5">&#128175;</div> <!-- Increased mb-4 to mb-5 -->
+                    <p class="font-semibold text-xl">Premium Quality</p>
+                    <p class="text-base opacity-80 mt-3">Durable materials, expert craftsmanship.</p> <!-- Increased mt-2 to mt-3 -->
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="text-5xl mb-5">&#128077;</div>
+                    <p class="font-semibold text-xl">Customer Satisfaction</p>
+                    <p class="text-base opacity-80 mt-3">Your happiness is our priority.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="text-5xl mb-5">&#128717;&#65039;</div>
+                    <p class="font-semibold text-xl">Stylish Designs</p>
+                    <p class="text-base opacity-80 mt-3">Curated collections for every taste.</p>
+                </div>
+            </div>
+            <div class="mt-24"> <!-- Increased mt-20 to mt-24 -->
+                <a href="products.html" class="cta-button text-white px-12 py-6 rounded-full text-2xl font-bold hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-amber-300 focus:ring-opacity-75 transition duration-300">
+                    Start Designing Your Home
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4 text-center">
+        <div class="container mx-auto">
+            <p>&copy; 2025 Timeless Living. All rights reserved.</p>
+            <div class="mt-4">
+                <a href="#" class="text-gray-400 hover:text-white mx-2">Privacy Policy</a>
+                <span class="text-gray-500">|</span>
+                <a href="#" class="text-gray-400 hover:text-white mx-2">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
