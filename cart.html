@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart - Timeless Living</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        .header {
+            background-color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            color: #555;
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .cart-items {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            gap: 20px;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .item-details {
+            flex-grow: 1;
+        }
+        .item-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.3em;
+            color: #333;
+        }
+        .item-details p {
+            margin: 0;
+            color: #777;
+            font-size: 0.95em;
+        }
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .item-controls input {
+            width: 50px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .item-controls .remove-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .item-controls .remove-btn:hover {
+            background-color: #c82333;
+        }
+        .cart-summary {
+            text-align: right;
+            border-top: 2px solid #6A5ACD;
+            padding-top: 20px;
+        }
+        .cart-summary p {
+            font-size: 1.3em;
+            margin: 5px 0;
+        }
+        .cart-summary .total {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .checkout-btn {
+            display: block;
+            width: 250px;
+            margin: 30px auto 0;
+            padding: 15px 30px;
+            background-color: #28a745;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+        .empty-cart-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: #777;
+            padding: 50px;
+            border: 1px dashed #ddd;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            font-size: 0.9em;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .cart-item img {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 10px;
+            }
+            .item-details {
+                width: 100%;
+                text-align: left;
+            }
+            .item-controls {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+            .checkout-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Your Shopping Cart</h1>
+        <a href="products.html" style="text-decoration: none; color: #007bff; font-weight: bold;">&larr; Continue Shopping</a>
+    </div>
+
+    <div class="container">
+        <ul id="cart-items-list" class="cart-items">
+            <!-- Cart items will be loaded here by JavaScript -->
+        </ul>
+        <div id="empty-cart-msg" class="empty-cart-message" style="display: none;">
+            Your cart is empty. <a href="products.html">Start shopping now!</a>
+        </div>
+        <div class="cart-summary">
+            <p>Subtotal: <span id="cart-subtotal">$0.00</span></p>
+            <p>Shipping: <span id="cart-shipping">$0.00</span></p>
+            <p class="total">Total: <span id="cart-total">$0.00</span></p>
+        </div>
+        <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Timeless Living. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function saveCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
+
+        function renderCart() {
+            const cart = loadCart();
+            const cartItemsList = document.getElementById('cart-items-list');
+            const emptyCartMsg = document.getElementById('empty-cart-msg');
+            let subtotal = 0;
+
+            cartItemsList.innerHTML = ''; // Clear previous items
+
+            if (cart.length === 0) {
+                emptyCartMsg.style.display = 'block';
+                document.querySelector('.cart-summary').style.display = 'none';
+                document.querySelector('.checkout-btn').style.display = 'none';
+                return;
+            } else {
+                emptyCartMsg.style.display = 'none';
+                document.querySelector('.cart-summary').style.display = 'block';
+                document.querySelector('.checkout-btn').style.display = 'block';
+            }
+
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.classList.add('cart-item');
+                li.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="item-details">
+                        <h3>${item.name}</h3>
+                        <p>Price: $${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="item-controls">
+                        <label for="quantity-${item.id}">Qty:</label>
+                        <input type="number" id="quantity-${item.id}" value="${item.quantity}" min="1" data-item-id="${item.id}">
+                        <button class="remove-btn" data-item-id="${item.id}">Remove</button>
+                    </div>
+                `;
+                cartItemsList.appendChild(li);
+                subtotal += item.price * item.quantity;
+            });
+
+            // Update quantities
+            cartItemsList.querySelectorAll('input[type="number"]').forEach(input => {
+                input.addEventListener('change', function() {
+                    const itemId = this.dataset.itemId;
+                    const newQuantity = parseInt(this.value);
+                    let currentCart = loadCart();
+                    const itemIndex = currentCart.findIndex(item => item.id === itemId);
+                    if (itemIndex > -1 && newQuantity >= 1) {
+                        currentCart[itemIndex].quantity = newQuantity;
+                        saveCart(currentCart);
+                        renderCart(); // Re-render to update totals
+                    } else if (newQuantity < 1) {
+                         // Optionally remove if quantity drops to 0 or less
+                         currentCart = currentCart.filter(item => item.id !== itemId);
+                         saveCart(currentCart);
+                         renderCart();
+                    }
+                });
+            });
+
+            // Remove items
+            cartItemsList.querySelectorAll('.remove-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = this.dataset.itemId;
+                    let currentCart = loadCart();
+                    currentCart = currentCart.filter(item => item.id !== itemId);
+                    saveCart(currentCart);
+                    renderCart(); // Re-render to update cart
+                });
+            });
+
+            const shippingCost = subtotal > 0 ? 25.00 : 0.00; // Example: $25 shipping if there are items
+            const total = subtotal + shippingCost;
+
+            document.getElementById('cart-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cart-shipping').innerText = `$${shippingCost.toFixed(2)}`;
+            document.getElementById('cart-total').innerText = `$${total.toFixed(2)}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCart);
+    </script>
+</body>
+</html>
